@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
 
-export const useRandomJoke = () => {
+export const useRandomJoke = (firstName, lastName) => {
 
     const [joke, setJoke] = useState('');
 
     useEffect(() => {
         const fetchJoke = async() => {
           try {
-            const response = await fetch('http://api.icndb.com/jokes/random?firstName=Solomon&lastName=Razak')
+            const response = await fetch(`http://api.icndb.com/jokes/random?firstName=${firstName}&lastName=${lastName}`)
             if(!response.ok){
               throw new Error(`this is the error: ${response.status}`)
             }
@@ -22,7 +22,7 @@ export const useRandomJoke = () => {
         }
         fetchJoke();
     
-      }, [])
+      }, [firstName, lastName])
 
       return joke;
 
